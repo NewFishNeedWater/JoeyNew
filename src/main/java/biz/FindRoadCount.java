@@ -1,5 +1,7 @@
 package biz;
 
+import java.math.BigDecimal;
+
 /**
  * Created by joeyy on 2017/5/25.
  */
@@ -13,25 +15,30 @@ public class FindRoadCount {
      * @param n 方格纵坐标最大值
      * @return 总共的路径数
      */
-    public Integer getTotalRoad(Integer m,Integer n){
+    public BigDecimal getTotalRoad(Integer m, Integer n){
 
-        Integer totalSteps = m+n-2;
-        Integer pickedSteps1 = m-1;
-        Integer pickedSteps2 = n-1;
+        BigDecimal m1 = new BigDecimal(m);
+        BigDecimal n1 = new BigDecimal(n);
 
-        Integer totalRoad = getCombineCount(totalSteps,pickedSteps1);
+        BigDecimal totalSteps = m1.add(n1).subtract(new BigDecimal(2));
 
-        Integer totalRoad1 = getCombineCount(totalSteps,pickedSteps2);
+        BigDecimal pickedSteps1 = m1.subtract(new BigDecimal(1));
+
+        BigDecimal pickedSteps2 = n1.subtract(new BigDecimal(1));
+
+        BigDecimal totalRoad = getCombineCount(totalSteps,pickedSteps1);
+
+        BigDecimal totalRoad1 = getCombineCount(totalSteps,pickedSteps2);
 
 
-        if(totalRoad.equals(totalRoad1)){
+        if(totalRoad.compareTo(totalRoad1)==0){
             return totalRoad;
 
         }else{
             System.out.println("---------------------getCombineCount method is not correct!!!------------------");
         }
 
-        return 0;
+        return BigDecimal.ZERO;
 
     }
 
@@ -42,17 +49,34 @@ public class FindRoadCount {
      * @param n 方格纵坐标最大值
      * @return 总共路径数
      */
-    public Integer goToCount(Integer m, Integer n) {
+    public BigDecimal goToCountForBigDecimal(BigDecimal m, BigDecimal n) {
 
         //若终点即起点，则无路可走
-        if (m==1 & n == 1) {
-            return 0;
+        if (m.compareTo(new BigDecimal(1))==0 && n.compareTo(new BigDecimal(1)) == 0) {
+            return BigDecimal.ZERO;
         }
         //若走到上边界或右边界,有且只有一种走法
-        if (m==1 || n==1) {
-            return 1;
+        if (m.compareTo(new BigDecimal(1))==0 || n.compareTo(new BigDecimal(1)) == 0) {
+            return new BigDecimal(1);
         }
-        return goToCount(m, n - 1) + goToCount(m - 1, n);
+        return goToCountForBigDecimal(m, n.subtract(new BigDecimal(1))) .add(goToCountForBigDecimal(m.subtract(new BigDecimal(1)), n));
+    }
+
+
+    /**
+     *
+     * @param m 方格横坐标最大值
+     * @param n 方格纵坐标最大值
+     * @return 总共路径数
+     */
+    public BigDecimal goToCount(Integer m, Integer n) {
+
+        BigDecimal m1 = new BigDecimal(m);
+        BigDecimal n1 = new BigDecimal(n);
+
+        return goToCountForBigDecimal(m1,n1);
+
+
     }
 
 
@@ -69,30 +93,40 @@ public class FindRoadCount {
         }
     }
 
+    public static BigDecimal factorial(BigDecimal n){
+        BigDecimal bd1 = new BigDecimal(1);//1
+        if(n.equals(new BigDecimal(1))||n.compareTo(BigDecimal.ZERO)==0){
+            return bd1;
+        }
+        else
+            return n.multiply(factorial(n.subtract(bd1)));//n*f(n-1)
+    }
+
     /**
      * 求组合数
      * @param totalCount 待选数目
      * @param pickCount 需选数目
      * @return 组合数
      */
-    private static Integer getCombineCount(Integer totalCount , Integer pickCount){
+    private static BigDecimal getCombineCount(BigDecimal totalCount , BigDecimal pickCount){
 
-        Integer totalRoad;
+        BigDecimal totalRoad;
 
 
-        System.out.println("totalCount :"+totalCount +" pickCount :"+pickCount);
-        if(totalCount>12){
+        System.out.println("totalCount :"+totalCount +" pickCount :"+pickCount + " from getCombineCount" );
+
+        /*if(totalCount>12){
             System.out.println("totalCount is "+totalCount +" >12 , so this case is not reliable" );
 
         }
         if(pickCount >12){
             System.out.println("pickCount is "+pickCount +" >12 , so this case is not reliable" );
 
-        }
+        }*/
 
-        totalRoad= (totalCount >= pickCount) ? getFactorialSum(totalCount) / getFactorialSum(totalCount - pickCount) / getFactorialSum(pickCount) : 0;
+        totalRoad= (totalCount.compareTo(pickCount)!=-1 ) ? factorial(totalCount).divide( factorial(totalCount.subtract(pickCount)) ).divide( factorial(pickCount)) : BigDecimal.ZERO;
 
-        System.out.println("totalRoad:" + totalRoad);
+        System.out.println("totalRoad:" + totalRoad + " from getCombineCount");
 
 
 

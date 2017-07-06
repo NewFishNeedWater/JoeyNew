@@ -5,6 +5,7 @@ import utils.RandomNumUtil;
 import biz.FindRoadCount;
 
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -25,7 +26,7 @@ public class TestFindRoad {
 
 
         //pull 10 nums from random unique number list
-        int[] a = RandomNumUtil.randomArray(1,12,12);
+        int[] a = RandomNumUtil.randomArray(1,20,10);
 
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
 
@@ -49,10 +50,10 @@ public class TestFindRoad {
         Integer count = 1;
         for(Map.Entry e:map.entrySet()){
             System.out.println("-------------------------------This is "+count +"th test, the m ="+(Integer)e.getKey() +", the n="+(Integer)e.getValue() +";---------------------");
-            Integer i = instance.getTotalRoad((Integer)e.getKey(),(Integer)e.getValue());
-            Integer j = instance.goToCount((Integer)e.getKey(),(Integer)e.getValue());
+            BigDecimal i = instance.getTotalRoad((Integer)e.getKey(),(Integer)e.getValue());
+            BigDecimal j = instance.goToCount((Integer)e.getKey(),(Integer)e.getValue());
             count++;
-            boolean isTheSame = (null!=i && null!=j && i.equals(j))?true:false;
+            boolean isTheSame = (null!=i && null!=j && i.compareTo(j)==0)?true:false;
 
             System.out.println("The getTotalRoad result is "+ i +";");
             System.out.println("The goToCount result is "+ j +";");
