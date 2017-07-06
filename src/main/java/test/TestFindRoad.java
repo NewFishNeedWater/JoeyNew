@@ -17,7 +17,41 @@ public class TestFindRoad {
 
     public static void main(String[] args) {
 
+        //testCreateArray();
+
         testIfTheResultIsSame();
+
+    }
+
+
+    private static void testCreateArray(){
+
+        int[] a = RandomNumUtil.randomArrayForUniqueNum(1,20,10);
+
+        int[] b = RandomNumUtil.getRandomArray(1,20,10);
+
+        System.out.println("-----------random array for unique number start---------");
+
+        for(int i : a ){
+
+            System.out.print(i+" ");
+
+
+        }
+        System.out.println("");
+        System.out.println("-----------random array for unique number start---------");
+
+        System.out.println("-----------random array for not unique number start---------");
+
+        for(int i : b ){
+
+            System.out.print(i+" ");
+
+        }
+        System.out.println("");
+        System.out.println("-----------random array for not unique number start---------");
+
+
 
     }
 
@@ -26,7 +60,9 @@ public class TestFindRoad {
 
 
         //pull 10 nums from random unique number list
-        int[] a = RandomNumUtil.randomArray(1,20,10);
+        int[] a = RandomNumUtil.randomArrayForUniqueNum(1,20,10);
+
+        //int[] a = RandomNumUtil.getRandomArray(1,20,10);
 
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
 
@@ -59,7 +95,7 @@ public class TestFindRoad {
             System.out.println("The goToCount result is "+ j +";");
             System.out.println("Is the result the same? :"+isTheSame +";");
 
-            System.out.println("----------------------------------------------------------------;");
+            System.out.println("-----------------------------------------end---------------------------------------;");
 
         }
 

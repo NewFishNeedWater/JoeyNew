@@ -17,7 +17,7 @@ public class RandomNumUtil {
      * @param n  随机数个数
      * @return int[] 随机数结果集
      */
-    public static int[] randomArray(int min,int max,int n){
+    public static int[] randomArrayForUniqueNum(int min,int max,int n){
         int len = max-min+1;
 
         if(max < min || n > len){
@@ -43,4 +43,30 @@ public class RandomNumUtil {
         }
         return result;
     }
+
+
+    public static int[] getRandomArray(int min, int max, int n){
+        int len = n;
+
+        if(max < min || n > len){
+            return null;
+        }
+
+        int[] source = new int[len];
+        Random rd = new Random();
+
+        int index =0;
+
+        for (int i = 0; i < source.length; i++) {
+            source[i] = rd.nextInt(max-min+1) + min;
+
+        }
+
+
+        return source;
+    }
+
+
+
+
 }
