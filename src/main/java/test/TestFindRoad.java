@@ -1,9 +1,8 @@
 package test;
 
 
-import Utils.RandomNumUtil;
+import utils.RandomNumUtil;
 import biz.FindRoadCount;
-import org.junit.Test;
 
 
 import java.util.HashMap;
