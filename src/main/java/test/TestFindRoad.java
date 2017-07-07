@@ -39,7 +39,7 @@ public class TestFindRoad {
 
         }
         System.out.println("");
-        System.out.println("-----------random array for unique number start---------");
+        System.out.println("-----------random array for unique number end---------");
 
         System.out.println("-----------random array for not unique number start---------");
 
@@ -49,7 +49,7 @@ public class TestFindRoad {
 
         }
         System.out.println("");
-        System.out.println("-----------random array for not unique number start---------");
+        System.out.println("-----------random array for not unique number end---------");
 
 
 
@@ -60,6 +60,7 @@ public class TestFindRoad {
 
 
         //pull 10 nums from random unique number list
+
         int[] a = RandomNumUtil.randomArrayForUniqueNum(1,20,10);
 
         //int[] a = RandomNumUtil.getRandomArray(1,20,10);
